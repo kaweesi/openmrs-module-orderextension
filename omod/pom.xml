@@ -18,6 +18,12 @@
 			<artifactId>${project.parent.artifactId}-api</artifactId>
 			<version>${project.parent.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>org.openmrs.module</groupId>
+			<artifactId>mohorderentrybridge-api</artifactId>
+			<version>${mohorderentrybridgeVersion}</version>
+			<scope>provided</scope>
+		</dependency>
 	</dependencies>
 
 	<build>

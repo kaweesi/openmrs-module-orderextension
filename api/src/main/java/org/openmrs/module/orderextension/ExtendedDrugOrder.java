@@ -13,8 +13,12 @@
  */
 package org.openmrs.module.orderextension;
 
+import java.util.Date;
+
 import org.openmrs.Concept;
 import org.openmrs.DrugOrder;
+import org.openmrs.Provider;
+import org.openmrs.User;
 
 /**
  * Adds the ability to Group a DrugOrder, and also adds some additional properties
@@ -104,5 +108,80 @@ public class ExtendedDrugOrder extends DrugOrder implements GroupableOrder {
 	 */
 	public void setAdministrationInstructions(String administrationInstructions) {
 		this.administrationInstructions = administrationInstructions;
+	}
+
+	@Override
+	public Date getStartDate() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setStartDate(Date startDate) {
+		// TODO Auto-generated method stub
+	}
+
+	@Override
+	public Provider getOrderer() {
+		return super.getOrderer();
+	}
+
+	@Override
+	public void setOrderer(Provider orderer) {
+		//super.setOrderer(orderer);
+	}
+
+	@Override
+	public Boolean getDiscontinued() {
+		return !super.isActive();
+	}
+
+	@Override
+	public void setDiscontinued(Boolean discontinued) {
+		// TODO Auto-generated method stub
+	}
+
+	@Override
+	public User getDiscontinuedBy() {
+		return null;
+	}
+
+	@Override
+	public void setDiscontinuedBy(User discontinuedBy) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Date getDiscontinuedDate() {
+		return super.getDateStopped();
+	}
+
+	@Override
+	public void setDiscontinuedDate(Date discontinuedDate) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Concept getDiscontinuedReason() {
+		return super.getOrderReason();
+	}
+
+	@Override
+	public void setDiscontinuedReason(Concept discontinuedReason) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public String getDiscontinuedReasonNonCoded() {
+		return super.getOrderReasonNonCoded();
+	}
+
+	@Override
+	public void setDiscontinuedReasonNonCoded(String discontinuedReasonNonCoded) {
+		// TODO Auto-generated method stub
+		
 	}
 }

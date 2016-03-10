@@ -20,6 +20,7 @@ import org.openmrs.Encounter;
 import org.openmrs.OpenmrsData;
 import org.openmrs.OrderType;
 import org.openmrs.Patient;
+import org.openmrs.Provider;
 import org.openmrs.User;
 
 /**
@@ -43,8 +44,8 @@ public interface GroupableOrder extends OpenmrsData {
 	public void setAutoExpireDate(Date autoExpireDate);
 	public Encounter getEncounter();
 	public void setEncounter(Encounter encounter);
-	public User getOrderer();
-	public void setOrderer(User orderer);
+	public Provider getOrderer();
+	public void setOrderer(Provider orderer);
 	public Boolean getDiscontinued();
 	public void setDiscontinued(Boolean discontinued);
 	public User getDiscontinuedBy();

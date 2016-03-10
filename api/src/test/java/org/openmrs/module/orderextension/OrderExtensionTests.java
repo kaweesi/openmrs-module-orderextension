@@ -39,7 +39,7 @@ public class OrderExtensionTests extends BaseModuleContextSensitiveTest {
 			drugOrder.setDrug(Context.getConceptService().getDrug(3));
 			drugOrder.setAdministrationInstructions("Take 2 and call me in the morning");
 			drugOrder.setStartDate(new Date());
-			Context.getOrderService().saveOrder(drugOrder);
+			Context.getOrderService().saveOrder(drugOrder, null);
 		}
 
 		Context.getPatientService().mergePatients(p1, p2);

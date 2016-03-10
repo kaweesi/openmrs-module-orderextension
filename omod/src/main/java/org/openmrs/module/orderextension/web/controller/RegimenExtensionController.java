@@ -30,6 +30,7 @@ import org.openmrs.DrugOrder;
 import org.openmrs.Encounter;
 import org.openmrs.Patient;
 import org.openmrs.api.context.Context;
+import org.openmrs.module.mohorderentrybridge.api.MoHOrderEntryBridgeService;
 import org.openmrs.module.orderextension.DrugOrderComparator;
 import org.openmrs.module.orderextension.DrugRegimen;
 import org.openmrs.module.orderextension.ExtendedDrugOrder;
@@ -62,7 +63,7 @@ public class RegimenExtensionController extends PortletController{
 	{	
 		Patient patient = Context.getPatientService().getPatient((Integer)model.get("patientId"));
 		
-		List<DrugOrder> allDrugOrders = Context.getOrderService().getDrugOrdersByPatient(patient);
+		List<DrugOrder> allDrugOrders = Context.getService(MoHOrderEntryBridgeService.class).getDrugOrdersByPatient(patient);
 		List<DrugOrder> drugOrdersNonContinuous = new ArrayList<DrugOrder>();
 		List<DrugOrder> drugOrdersContinuous = new ArrayList<DrugOrder>();
 		List<DrugRegimen> cycles = new ArrayList<DrugRegimen>();
@@ -74,7 +75,7 @@ public class RegimenExtensionController extends PortletController{
 		
 		for(DrugOrder drugOrder : allDrugOrders)
 		{
-			if(drugOrder.getDiscontinuedDate() != null || drugOrder.getAutoExpireDate() != null)
+			if(drugOrder.getEffectiveStopDate() != null || drugOrder.getAutoExpireDate() != null)
 			{
 				//now check if they are one of the indications that we want to show in the calendar
 				if(drugOrder instanceof ExtendedDrugOrder)

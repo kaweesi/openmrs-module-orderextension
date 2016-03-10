@@ -201,7 +201,7 @@ public class OrderExtensionAjaxController {
 	@RequestMapping("/module/orderextension/getDrugOrder")
 	public void getDrugOrder(@RequestParam(value = "id", required=true) Integer id, HttpServletResponse response)
 	{
-		DrugOrder drugOrder = Context.getOrderService().getOrder(id, DrugOrder.class);
+		DrugOrder drugOrder = (DrugOrder) Context.getOrderService().getOrder(id);
 		
 		Drug drug = drugOrder.getDrug();
 		
@@ -239,31 +239,29 @@ public class OrderExtensionAjaxController {
 		}
 		info.put("dose", dose);
 		
-		String frequency = drugOrder.getFrequency();
-		String freqDay = "";
-		String freqWeek = "";
-		if(frequency != null && frequency.length() > 0 && frequency.contains("x"))
-		{
-			String[] substrings = frequency.split("x");
-			
-			freqDay = substrings[0].trim();
-			freqWeek = substrings[1].trim();
+		String freqDay;
+		String freqWeek;
+		if (drugOrder.getFrequency() != null && drugOrder.getFrequency().getConcept() != null && drugOrder.getFrequency().getConcept().getName() != null) {
+			String frequency = drugOrder.getFrequency().getConcept().getName().getName();
+			freqDay = "";
+			freqWeek = "";
+			if (frequency != null && frequency.length() > 0 && frequency.contains("x")) {
+				String[] substrings = frequency.split("x");
+
+				freqDay = substrings[0].trim();
+				freqWeek = substrings[1].trim();
+			} else if (frequency != null && frequency.length() > 0) {
+				if (frequency.contains("week")) {
+					freqWeek = frequency.trim();
+				} else {
+					freqDay = frequency.trim();
+				}
+			} 
+			info.put("freqDay", freqDay);
+			info.put("freqWeek", freqWeek);
 		}
-		else if (frequency != null && frequency.length() > 0) 
-		{
-			if(frequency.contains("week"))
-			{
-				freqWeek = frequency.trim();
-			}
-			else
-			{
-				freqDay = frequency.trim();
-			}
-		}
-		info.put("freqDay", freqDay);
-		info.put("freqWeek", freqWeek);
 		
-		info.put("asNeeded", drugOrder.getPrn().toString());
+		info.put("asNeeded", drugOrder.getAsNeeded().toString());
 		
 		info.put("instructions", drugOrder.getInstructions());
 		
@@ -301,7 +299,7 @@ public class OrderExtensionAjaxController {
 			info.put("indication", ind);
 		}
 		
-		info.put("startDate", Context.getDateFormat().format(drugOrder.getStartDate()));
+		info.put("startDate", Context.getDateFormat().format(drugOrder.getEffectiveStartDate()));
 		
 		if(drugOrder.getAutoExpireDate() != null)
 		{

@@ -50,12 +50,12 @@ public class OrderExtensionUtil  {
 				}
 				
 				if("length".equals(format)){
-					if(drugOrder.getDiscontinuedDate() != null) {
-						return calculateDaysDifference(drugOrder.getDiscontinuedDate(), drugOrder.getStartDate());
+					if(drugOrder.getEffectiveStopDate() != null) {
+						return calculateDaysDifference(drugOrder.getEffectiveStopDate(), drugOrder.getEffectiveStartDate());
 						
 					}
 					if(drugOrder.getAutoExpireDate() != null) {
-						return calculateDaysDifference(drugOrder.getAutoExpireDate(), drugOrder.getStartDate());
+						return calculateDaysDifference(drugOrder.getAutoExpireDate(), drugOrder.getEffectiveStartDate());
 						
 					}
 					else

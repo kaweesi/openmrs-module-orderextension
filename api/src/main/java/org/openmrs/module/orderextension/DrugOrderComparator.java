@@ -30,11 +30,11 @@ public class DrugOrderComparator implements Comparator<DrugOrder> {
         
         if(r1.getDrug() != null && r1.getDrug().equals(r2.getDrug()))
         {
-     	   if(r1.getStartDate().compareTo(r2.getStartDate()) < 0)
+     	   if(r1.getEffectiveStartDate().compareTo(r2.getEffectiveStartDate()) < 0)
      	   {
      		   return -1;
      	   }
-     	   else if(r1.getStartDate().compareTo(r2.getStartDate()) > 0)
+     	   else if(r1.getEffectiveStartDate().compareTo(r2.getEffectiveStartDate()) > 0)
      	   {
 					return 1;
      	   }
@@ -42,11 +42,11 @@ public class DrugOrderComparator implements Comparator<DrugOrder> {
         }
         else
         {
-     	   if(r1.getStartDate().compareTo(r2.getStartDate()) < 0)
+     	   if(r1.getEffectiveStartDate().compareTo(r2.getEffectiveStartDate()) < 0)
      	   {
      		   return -10;
      	   }
-     	   else if(r1.getStartDate().compareTo(r2.getStartDate()) > 0)
+     	   else if(r1.getEffectiveStartDate().compareTo(r2.getEffectiveStartDate()) > 0)
      	   {
 				return 10;
      	   }

@@ -120,7 +120,7 @@ public class RegimenHelper {
 		{		
 			Concept classification = null;
 			if (o instanceof ExtendedDrugOrder) {
-				if(drugGroup == null || getCycleDay(drugGroup.getFirstDrugOrderStartDate(), o.getStartDate()).equals(day))
+				if(drugGroup == null || getCycleDay(drugGroup.getFirstDrugOrderStartDate(), o.getEffectiveStartDate()).equals(day))
 				{
 					classification = ((ExtendedDrugOrder)o).getIndication();
 				}
@@ -157,9 +157,9 @@ public class RegimenHelper {
 			
 			for(DrugOrder od: drugGroup.getMembers())
 			{
-				if(od.getStartDate() != null && startDate != null)
+				if(od.getEffectiveStartDate() != null && startDate != null)
 				{
-					long cycleDay = od.getStartDate().getTime() - startDate.getTime();
+					long cycleDay = od.getEffectiveStartDate().getTime() - startDate.getTime();
 					if(cycleDay > 0)
 					{
 						cycleDay = cycleDay/86400000;
@@ -188,7 +188,7 @@ public class RegimenHelper {
 		
 		for(DrugOrder o : ordersInDrugGroups.get(cycle))
 		{
-			if(cycle == null || (cycle != null && getCycleDay(cycle.getFirstDrugOrderStartDate(), o.getStartDate()).equals(day)))
+			if(cycle == null || (cycle != null && getCycleDay(cycle.getFirstDrugOrderStartDate(), o.getEffectiveStartDate()).equals(day)))
 			{
 				Concept orderIndication = null;
 				if (o instanceof ExtendedDrugOrder) {
